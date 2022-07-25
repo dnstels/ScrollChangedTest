@@ -1,0 +1,28 @@
+﻿<Window x:Class="ScrollChangedTest.MainWindow"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:local="clr-namespace:ScrollChangedTest.ViewModels"
+                mc:Ignorable="d"
+                xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                Title="MainWindow" Height="350" Width="525">
+    <Window.DataContext>
+        <local:MainWindowViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <DataGrid ItemsSource="{Binding DataItems}" AutoGenerateColumns="True">
+            <i:Interaction.Triggers>
+                <local:RoutedEventTrigger RoutedEvent="ScrollViewer.ScrollChanged">
+                    <local:CustomCommandAction Command="{Binding ScrollCommand}" />
+                </local:RoutedEventTrigger>
+            </i:Interaction.Triggers>
+        </DataGrid>
+        <TextBlock Grid.Row="1" Text="{Binding ScrollData}" />
+    </Grid>
+
+</Window>
